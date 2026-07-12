@@ -1,0 +1,10 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="CourseManagment.BLL/CourseManagment.BLL.csproj" />
+  <Project Path="CourseManagment.DAL/CourseManagment.DAL.csproj" />
+  <Project Path="CourseManagmentSystem/CourseManagmentSystem.csproj" />
+</Solution>

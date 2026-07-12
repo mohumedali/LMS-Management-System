@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>CourseManagment.BLL</id>
+    <version>1.0.0</version>
+    <authors>CourseManagment.BLL</authors>
+    <description>Package Description</description>
+    <repository type="git" />
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="CourseManagment.DAL" version="1.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.BLL\bin\Debug\net8.0\CourseManagment.BLL.dll" target="lib\net8.0\CourseManagment.BLL.dll" />
+  </files>
+</package>
