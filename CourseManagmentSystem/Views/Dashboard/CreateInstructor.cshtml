@@ -1,0 +1,175 @@
+﻿@model CourseManagment.BLL.ViewModels.InstructorsVM.CreateInstructorViewModel
+
+@{
+    ViewData["Title"] = "Create Instructor";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold">Create Instructor</h2>
+            <p class="text-muted mb-0">
+                Add a new instructor to the platform
+            </p>
+        </div>
+
+        <a asp-action="InstructorManagement"
+           class="btn btn-outline-secondary">
+
+            <i class="fa-solid fa-arrow-left me-2"></i>
+
+            Back
+
+        </a>
+
+    </div>
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body p-4">
+
+            <form asp-action="CreateInstructor" method="post" enctype="multipart/form-data">
+
+                <div asp-validation-summary="ModelOnly"
+                     class="alert alert-danger"></div>
+
+                <div class="row">
+
+                    <!-- Full Name -->
+
+                    <div class="col-md-6 mb-4">
+
+                        <label asp-for="FullName"
+                               class="form-label fw-semibold">
+                        </label>
+
+                        <input asp-for="FullName"
+                               class="form-control" />
+
+                        <span asp-validation-for="FullName"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Email -->
+
+                    <div class="col-md-6 mb-4">
+
+                        <label asp-for="Email"
+                               class="form-label fw-semibold">
+                        </label>
+
+                        <input asp-for="Email"
+                               class="form-control" />
+
+                        <span asp-validation-for="Email"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Phone -->
+
+                    <div class="col-md-6 mb-4">
+
+                        <label asp-for="Phone"
+                               class="form-label fw-semibold">
+                        </label>
+
+                        <input asp-for="Phone"
+                               class="form-control" />
+
+                        <span asp-validation-for="Phone"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Specialization -->
+
+                    <div class="col-md-6 mb-4">
+
+                        <label asp-for="Specialization"
+                               class="form-label fw-semibold">
+                        </label>
+
+                        <input asp-for="Specialization"
+                               class="form-control" />
+
+                        <span asp-validation-for="Specialization"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Image -->
+
+                    <div class="col-12 mb-4">
+
+                        <label asp-for="Image"
+                               class="form-label fw-semibold">
+                        </label>
+
+                        <input asp-for="ImageFile"
+                               type="file"
+                               class="form-control"
+                               accept="image/*" />
+
+                        <span asp-validation-for="ImageFile"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Bio -->
+
+                    <div class="col-12 mb-4">
+
+                        <label asp-for="Bio"
+                               class="form-label fw-semibold">
+                        </label>
+
+                        <textarea asp-for="Bio"
+                                  rows="6"
+                                  class="form-control"></textarea>
+
+                        <span asp-validation-for="Bio"
+                              class="text-danger"></span>
+
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="d-flex justify-content-end">
+
+                    <a asp-action="InstructorManagement"
+                       class="btn btn-light me-2">
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-success">
+
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+
+                        Create Instructor
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

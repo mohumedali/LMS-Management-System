@@ -1,0 +1,272 @@
+﻿@model CourseManagment.BLL.ViewModels.InstructorsVM.InstructorDetailsViewModel
+
+@{
+    ViewData["Title"] = "Instructor Details";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold">Instructor Details</h2>
+            <p class="text-muted mb-0">
+                View instructor profile and assigned courses
+            </p>
+        </div>
+
+        <div>
+
+            <a asp-action="EditInstructor"
+               asp-route-id="@Model.Id"
+               class="btn btn-warning me-2">
+
+                <i class="fa-solid fa-pen"></i>
+                Edit
+
+            </a>
+
+            <a asp-action="InstructorManagement"
+               class="btn btn-outline-secondary">
+
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <!-- Left -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body text-center">
+
+                    <img src=~/Images/@Model.Image"
+                         class="rounded-circle shadow mb-3"
+                         width="180"
+                         height="180"
+                         style="object-fit:cover;" />
+
+                    <h3 class="fw-bold">
+
+                        @Model.FullName
+
+                    </h3>
+
+                    <span class="badge bg-primary fs-6">
+
+                        @Model.Specialization
+
+                    </span>
+
+                    <hr />
+
+                    <div class="text-start">
+
+                        <p>
+
+                            <i class="fa-solid fa-envelope text-primary me-2"></i>
+
+                            @Model.Email
+
+                        </p>
+
+                        <p>
+
+                            <i class="fa-solid fa-phone text-success me-2"></i>
+
+                            @Model.Phone
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card shadow-sm border-0 mt-4">
+
+                <div class="card-body">
+
+                    <h5 class="fw-bold mb-3">
+
+                        Statistics
+
+                    </h5>
+
+                    <div class="d-flex justify-content-between mb-3">
+
+                        <span>Total Courses</span>
+
+                        <span class="badge bg-success">
+
+                            @Model.Courses.Count
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right -->
+
+        <div class="col-lg-8">
+
+            <!-- Bio -->
+
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold mb-3">
+
+                        Biography
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        @Model.Bio
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Courses -->
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-header bg-white">
+
+                    <h4 class="fw-bold mb-0">
+
+                        Courses
+
+                    </h4>
+
+                </div>
+
+                <div class="card-body p-0">
+
+                    @if (Model.Courses.Any())
+                    {
+                        <div class="table-responsive">
+
+                            <table class="table table-hover align-middle mb-0">
+
+                                <thead class="table-light">
+
+                                    <tr>
+
+                                        <th>#</th>
+
+                                        <th>Course</th>
+
+                                        <th>Category</th>
+
+                                        <th>Price</th>
+
+                                        <th>Enrollments</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var course in Model.Courses)
+                                    {
+                                        <tr>
+
+                                            <td>
+
+                                                @course.Id
+
+                                            </td>
+
+                                            <td>
+
+                                                <strong>
+
+                                                    @course.Title
+
+                                                </strong>
+
+                                            </td>
+
+                                            <td>
+
+                                                @course.Category
+
+                                            </td>
+
+                                            <td>
+
+                                                @course.Price.ToString("C")
+
+                                            </td>
+
+                                            <td>
+
+                                                <span class="badge bg-success">
+
+                                                    @course.EnrollmentsCount
+
+                                                </span>
+
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+
+                            <i class="fa-solid fa-book-open fa-3x text-secondary mb-3"></i>
+
+                            <h5>
+
+                                No Courses Found
+
+                            </h5>
+
+                            <p class="text-muted">
+
+                                This instructor hasn't been assigned any courses yet.
+
+                            </p>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

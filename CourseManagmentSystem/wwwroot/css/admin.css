@@ -1,0 +1,326 @@
+﻿/* ===========================
+   Admin Dashboard
+=========================== */
+
+:root {
+    --sidebar-bg: #111827;
+    --sidebar-hover: #2563eb;
+    --primary: #2563eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --purple: #7c3aed;
+    --dark: #1f2937;
+    --light: #f8fafc;
+    --border: #e5e7eb;
+}
+
+/* ===========================
+   Body
+=========================== */
+
+body {
+    background: #f5f7fb;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===========================
+   Sidebar
+=========================== */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--sidebar-bg);
+    color: white;
+    overflow-y: auto;
+    box-shadow: 6px 0 20px rgba(0,0,0,.15);
+    z-index: 999;
+}
+
+    .sidebar .logo {
+        padding: 28px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+        .sidebar .logo i {
+            color: #60a5fa;
+            margin-right: 8px;
+        }
+
+    .sidebar ul {
+        list-style: none;
+        padding: 15px;
+        margin: 0;
+    }
+
+    .sidebar li {
+        margin-bottom: 8px;
+    }
+
+    .sidebar a {
+        color: #d1d5db;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 18px;
+        border-radius: 12px;
+        transition: .3s;
+        font-size: 15px;
+    }
+
+        .sidebar a:hover {
+            background: var(--sidebar-hover);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .sidebar a i {
+            font-size: 20px;
+        }
+
+/* ===========================
+   Main
+=========================== */
+
+.main-wrapper {
+    margin-left: 260px;
+    min-height: 100vh;
+}
+
+/* ===========================
+   Navbar
+=========================== */
+
+.top-navbar {
+    height: 75px;
+    background: white;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,.05);
+}
+
+    .top-navbar i {
+        cursor: pointer;
+        transition: .3s;
+    }
+
+        .top-navbar i:hover {
+            color: var(--primary);
+        }
+
+/* ===========================
+   Cards
+=========================== */
+
+.stat-card {
+    border-radius: 18px;
+    color: white;
+    padding: 25px;
+    transition: .35s;
+    box-shadow: 0 12px 25px rgba(0,0,0,.12);
+    position: relative;
+    overflow: hidden;
+}
+
+    .stat-card::after {
+        content: "";
+        position: absolute;
+        right: -20px;
+        top: -20px;
+        width: 100px;
+        height: 100px;
+        background: rgba(255,255,255,.15);
+        border-radius: 50%;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .stat-card i {
+        font-size: 34px;
+        margin-bottom: 15px;
+    }
+
+    .stat-card h2 {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .stat-card span {
+        opacity: .9;
+    }
+
+/* Colors */
+
+.blue {
+    background: linear-gradient(135deg,#3b82f6,#2563eb);
+}
+
+.green {
+    background: linear-gradient(135deg,#22c55e,#16a34a);
+}
+
+.orange {
+    background: linear-gradient(135deg,#f59e0b,#ea580c);
+}
+
+.red {
+    background: linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+.purple {
+    background: linear-gradient(135deg,#8b5cf6,#6d28d9);
+}
+
+.dark {
+    background: linear-gradient(135deg,#374151,#111827);
+}
+
+/* ===========================
+   Dashboard Cards
+=========================== */
+
+.dashboard-card {
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+    .dashboard-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .dashboard-card .card-body {
+        padding: 25px;
+    }
+
+    .dashboard-card h5 {
+        font-weight: bold;
+        margin-bottom: 25px;
+    }
+
+/* ===========================
+   Table
+=========================== */
+
+.table th {
+    border: none;
+    color: #6b7280;
+}
+
+.table td {
+    border: none;
+    vertical-align: middle;
+    padding: 16px 10px;
+}
+
+.table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* ===========================
+   Badges
+=========================== */
+
+.badge {
+    padding: 8px 14px;
+    border-radius: 50px;
+    font-size: 13px;
+}
+
+/* ===========================
+   Images
+=========================== */
+
+img {
+    object-fit: cover;
+}
+
+.rounded-course {
+    border-radius: 12px;
+}
+
+/* ===========================
+   Top Courses
+=========================== */
+
+.course-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+    .course-item img {
+        width: 90px;
+        height: 65px;
+        border-radius: 12px;
+    }
+
+    .course-item h6 {
+        margin-bottom: 3px;
+        font-weight: 600;
+    }
+
+    .course-item small {
+        color: gray;
+    }
+
+/* ===========================
+   Chart
+=========================== */
+
+canvas {
+    max-height: 340px;
+}
+
+/* ===========================
+   Scrollbar
+=========================== */
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 20px;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:992px) {
+
+    .sidebar {
+        left: -260px;
+        transition: .4s;
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+    }
+}
+
+@media(max-width:768px) {
+
+    .stat-card {
+        margin-bottom: 20px;
+    }
+
+    .top-navbar {
+        padding: 15px;
+    }
+}

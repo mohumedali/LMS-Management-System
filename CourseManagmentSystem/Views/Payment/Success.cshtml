@@ -1,0 +1,74 @@
+﻿@model CourseManagment.BLL.ViewModels.PaymentVm.PaymentDetailsViewModel
+
+@{
+    ViewData["Title"] = "Payment Successful";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-lg rounded-4">
+
+                <div class="card-body text-center p-5">
+
+                    <div class="mb-4">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size:80px"></i>
+                    </div>
+
+                    <h2 class="fw-bold text-success">
+                        Payment Successful
+                    </h2>
+
+                    <p class="text-muted mb-4">
+                        Your payment has been completed successfully. You now have
+                        full access to the course.
+                    </p>
+
+                    <hr />
+
+                    <div class="row text-start mt-4">
+
+                        <div class="col-6 fw-semibold">Course</div>
+                        <div class="col-6 text-end">@Model.CourseTitle</div>
+
+                        <div class="col-6 fw-semibold mt-3">Amount</div>
+                        <div class="col-6 text-end mt-3">$@Model.Amount.ToString("0.00")</div>
+
+                        <div class="col-6 fw-semibold mt-3">Payment Method</div>
+                        <div class="col-6 text-end mt-3">@Model.PaymentMethod</div>
+
+                        <div class="col-6 fw-semibold mt-3">Transaction ID</div>
+                        <div class="col-6 text-end mt-3">@Model.TransactionId</div>
+
+                    </div>
+
+                    <div class="mt-5 d-flex justify-content-center gap-2">
+
+                        <a asp-controller="Enrollment"
+                           asp-action="MyLearning"
+                           class="btn btn-success px-4">
+                            Go To My Courses
+                        </a>
+
+                        <a asp-controller="Payment"
+                           asp-action="Receipt"
+                           asp-route-id="@Model.Id"
+                           class="btn btn-outline-success px-4">
+                            <i class="bi bi-printer me-1"></i>
+                            View Receipt
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

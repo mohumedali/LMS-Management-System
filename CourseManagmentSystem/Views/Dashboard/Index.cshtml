@@ -1,0 +1,216 @@
+﻿@using System.Text.Json
+@using CourseManagment.BLL.ViewModels.DashboardVM
+@using CourseManagment.DAL.Common
+@model DashboardViewModel
+
+@{
+
+    Layout = "_AdminLayout";
+
+}
+
+<div class="row g-4">
+
+    <div class="col-md-4 col-xl-2">
+
+        <div class="stat-card blue">
+
+            <i class="bi bi-book-fill"></i>
+
+            <h2>@Model.TotalCourses</h2>
+
+            <span>Total Courses</span>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+
+        <div class="stat-card green">
+
+            <i class="bi bi-mortarboard-fill"></i>
+
+            <h2>@Model.TotalStudents</h2>
+
+            <span>Students</span>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+
+        <div class="stat-card orange">
+
+            <i class="bi bi-person-workspace"></i>
+
+            <h2>@Model.TotalInstructors</h2>
+
+            <span>Instructors</span>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+
+        <div class="stat-card red">
+
+            <i class="bi bi-journal-check"></i>
+
+            <h2>@Model.TotalEnrollments</h2>
+
+            <span>Enrollments</span>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+
+        <div class="stat-card purple">
+
+            <i class="bi bi-cash-stack"></i>
+
+            <h2>$@Model.TotalRevenue</h2>
+
+            <span>Revenue</span>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+
+        <div class="stat-card dark">
+
+            <i class="bi bi-star-fill"></i>
+
+            <h2>@Model.AverageRating</h2>
+
+            <span>Rating</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mt-5">
+
+    <div class="col-lg-8">
+
+        <div class="card dashboard-card">
+
+            <div class="card-body">
+
+                <h5>Monthly Enrollments</h5>
+
+                <canvas id="enrollmentChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="card dashboard-card">
+
+            <div class="card-body">
+
+                <h5>Enrollment Status</h5>
+
+                <canvas id="statusChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <div class="col-lg-7">
+
+        @await Html.PartialAsync("_TopCourses", Model)
+
+    </div>
+
+    <div class="col-12 mt-5">
+
+        @await Html.PartialAsync("_RecentEnrollments", Model)
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <script>
+
+        const months = @Html.Raw(JsonSerializer.Serialize(Model.EnrollmentMonths));
+        const counts = @Html.Raw(JsonSerializer.Serialize(Model.EnrollmentCounts));
+
+        const active = @Model.ActiveEnrollments;
+        const completed = @Model.CompletedEnrollments;
+        const cancelled = @Model.CancelledEnrollments;
+
+        // Enrollment Chart
+        new Chart(document.getElementById('enrollmentChart'), {
+
+            type: 'bar',
+
+            data: {
+
+                labels: months,
+
+                datasets: [{
+
+                    label: 'Enrollments',
+
+                    data: counts,
+
+                    backgroundColor: '#2563eb',
+
+                    borderRadius: 8
+
+                }]
+
+            }
+
+        });
+
+        // Status Chart
+        new Chart(document.getElementById('statusChart'), {
+
+            type: 'doughnut',
+
+            data: {
+
+                labels: ['Active', 'Completed', 'Cancelled'],
+
+                datasets: [{
+
+                    data: [active, completed, cancelled],
+
+                    backgroundColor: [
+                        '#22c55e',
+                        '#2563eb',
+                        '#ef4444'
+                    ]
+
+                }]
+
+            }
+
+        });
+
+    </script>
+
+}
+

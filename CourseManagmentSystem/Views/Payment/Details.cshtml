@@ -1,0 +1,104 @@
+﻿@using CourseManagment.BLL.ViewModels.PaymentVm
+@model  PaymentDetailsViewModel
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-success text-white">
+
+                    <h3 class="mb-0">
+
+                        Payment Details
+
+                    </h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th>Transaction</th>
+                            <td>@Model.TransactionId</td>
+                        </tr>
+
+                        <tr>
+                            <th>Course</th>
+                            <td>@Model.CourseTitle</td>
+                        </tr>
+
+                        <tr>
+                            <th>Student</th>
+                            <td>@Model.UserName</td>
+                        </tr>
+
+                        <tr>
+                            <th>Amount</th>
+                            <td>$@Model.Amount</td>
+                        </tr>
+
+                        <tr>
+                            <th>Method</th>
+                            <td>@Model.PaymentMethod</td>
+                        </tr>
+
+                        <tr>
+                            <th>Status</th>
+
+                            <td>
+
+                                @if (Model.Status.ToString() == "Pending")
+                                {
+                                    <span class="badge bg-warning">
+                                        Pending
+                                    </span>
+                                }
+                                else if (Model.Status.ToString() == "Completed")
+                                {
+                                    <span class="badge bg-success">
+                                        Paid
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+                                        @Model.Status
+                                    </span>
+                                }
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    @if (Model.Status.ToString() == "Pending")
+                    {
+                        <form asp-action="Complete" method="post">
+
+                            <input type="hidden" name="id" value="@Model.Id" />
+
+                            <button class="btn btn-success">
+
+                                Confirm Payment
+
+                            </button>
+
+                        </form>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

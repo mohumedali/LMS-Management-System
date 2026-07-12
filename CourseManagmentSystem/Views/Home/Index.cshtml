@@ -1,0 +1,1176 @@
+﻿@using CourseManagment.BLL.ViewModels.HomeVM;
+@model HomePageVm;
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <!-- //////////////////////////////////////////// -->
+    <!-- navvvbaaarrrrrr -->
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold fs-1 " asp-controller="Home" asp-action="Index">
+                Learnio
+            </a>
+            <!-- Mobile Button -->
+            <button class="navbar-toggler border-0" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarContent">
+
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+
+                <!-- Categories -->
+                <ul class="navbar-nav ms-3">
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle fw-semibold"
+                           href="#"
+                           data-bs-toggle="dropdown">
+
+                            Categories
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            @foreach (var category in Model.Categories)
+                            {
+                                <li>
+
+                                    <a class="dropdown-item"
+                                       asp-controller="Course"
+                                       asp-action="Index"
+                                       asp-route-categoryId="@category.Id">
+
+                                        @category.Name
+
+                                    </a>
+
+                                </li>
+                            }
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+                <!-- Search -->
+                <form class="d-flex flex-grow-1 mx-lg-4 my-3 my-lg-0">
+
+                    <div class="input-group">
+
+                        <input type="text"
+                               class="form-control rounded-start-pill border-end-0"
+                               placeholder="What do you want to learn?">
+
+                        <button class="btn btn-success rounded-end-pill px-4">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <!-- Links -->
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" asp-controller="Course" asp-action="Index">Courses</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" asp-controller="Enrollment" asp-action="MyLearning">My Courses</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" asp-action="Index" asp-controller="Profile">Profile</a>
+                    </li>
+
+
+                </ul>
+
+                <!-- Actions -->
+                <div class="d-flex align-items-center ms-lg-3">
+
+                    <a asp-controller="Account" asp-action="Login" class="nav-link fw-semibold me-3">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Login
+                    </a>
+
+                    <a asp-controller="Account" asp-action="Register" class="btn  register-btn rounded-3 px-4">
+                        <i class="fa-regular fa-user me-1"></i>
+                        Register
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- //////////////////////////////////////// -->
+    <!-- hhhhherroooeijo sectioonnnnnbnnn -->
+    <section class="hero">
+        <div class="slider">
+
+            <!-- slidee111 -->
+            <div class="slide slide1 active">
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+
+                    <h1>
+                        Learn Without Limits
+                    </h1>
+
+                    <p>
+                        Learn from expert instructors with flexible online courses.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a class="join-btn" asp-controller="Account" asp-action="Register">
+                            Join with Us
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="#" class="watch-btn"
+                           data-video="https://www.youtube.com/embed/ezbJwaLmOeM?si=OazGcE_O1gU72tM0">
+
+
+                
+                            Watch Preview
+                            <span class="play">
+                                <i class="fa-solid fa-play"></i>
+                            </span>
+
+
+
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- slidee2 -->
+            <div class="slide slide2">
+                <div class="hero-overlay"></div>
+
+                <div class="hero-content">
+
+                    <h1>Master New Skills Today</h1>
+
+                    <p>
+                        Discover hundreds of professional courses and start your learning journey.
+                    </p>
+
+
+                    <div class="hero-buttons">
+
+                        <a href="#" class="join-btn">
+                            Join with Us
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="#" class="watch-btn"
+                           data-video="https://www.youtube.com/embed/q-3VyQQ_wFM?si=eI5AyVQvei26eKsS">
+
+
+                
+                            Watch Preview
+                            <span class="play">
+                                <i class="fa-solid fa-play"></i>
+                            </span>
+
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+    
+            </div>
+
+        </div>
+
+        <button class="arrow left">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button class="arrow right">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+    
+
+    </section>
+
+    <!-- /////////////////////////////////////////////////// -->
+    <!-- features section -->
+    <section class="features">
+        <div class="features-container">
+            <div class="feature-card">
+
+                <div class="icon">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <h3>Expert Teachers</h3>
+                <p>
+                    Learn from experienced instructors with practical industry knowledge.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+                <h3>Easy Communication</h3>
+                <p>
+                    Stay connected with instructors and classmates anytime.
+                </p>
+            </div>
+            <div class="feature-card ">
+                <div class="icon">
+                    <i class="fa-solid fa-certificate"></i>
+                </div>
+                <h3>Get Certificates</h3>
+                <p>
+                    Earn certificates after successfully completing your courses.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- //////////////////////////////////////////////// -->
+    <!-- typessssssssssssssssssssssssssssssssssss -->
+
+    <section class="types container">
+        <div class="types-header">
+
+            <div class="types-title">
+
+                <span>Categories</span>
+
+                <h2 class="type-title">Popular Categories</h2>
+
+            </div>
+
+            <a href="#" class="types-btn">
+                All Categories
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+        <div class="container">
+
+       
+
+            <div class="types-cards">
+
+                <!-- Card 1 -->
+                @foreach (var item in Model.Categories)
+                {
+
+
+                    <div class="types-card">
+
+                        <img src="~/Images/@item.ImageUrl" asp-append-version="true" />
+
+                        <div class="types-overlay"></div>
+
+                        <div class="types-content">
+
+                            <h3>@item.Name</h3>
+
+                            <p>@item.CoursesCount Courses</p>
+
+                            <a asp-controller="Course" asp-action="Index" class="explore-btn">
+                                Explore
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </section>
+        <!-- /////////////////////////////////////// -->
+        <section class="courses">
+
+            <!-- Title -->
+
+            <div class="courses-title">
+
+                <span>Choose your desired courses</span>
+
+                <h2 class="big-title">
+                    The world's largest selection of courses
+                </h2>
+
+            </div>
+
+            <div class="container">
+
+        
+
+        
+                <div class="course-tabs">
+
+                    @for (int i = 0; i < Model.Categories.Count(); i++)
+                    {
+                        var category = Model.Categories.ElementAt(i);
+
+                        <a href="#"
+                           class="tab @(i == 0 ? "active" : "")"
+                           data-tab="@category.Id">
+
+                            @category.Name
+
+                        </a>
+                    }
+
+                </div>
+
+                @for (int i = 0; i < Model.Categories.Count(); i++)
+                {
+                    var category = Model.Categories.ElementAt(i);
+
+                    <div class="tab-content @(i == 0 ? "active" : "")"
+                         id="@category.Id">
+
+                        @foreach (var course in Model.PopularCourses.Where(c => c.CategoryId == category.Id))
+                        {
+                            <div class="course-card">
+
+                                <div class="course-img">
+
+                                    <img src="~/Images/@course.ImageUrl" class="rounded-bottom" alt="@course.Title">
+
+                                    <div class="course-badges">
+
+                                        @if (course.IsBestSeller)
+                                        {
+                                            <span class="badge orange">Bestseller</span>
+                                        }
+
+                                        @if (course.IsHighestRated)
+                                        {
+                                            <span class="badge orange">Highest Rated</span>
+                                        }
+
+                                        @if (course.DiscountPercentage > 0)
+                                        {
+                                            <span class="badge blue">
+                                                -@course.DiscountPercentage%
+                                            </span>
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                                <div class="course-info">
+
+                                    <span class="level">@course.Level</span>
+
+                                    <h3>@course.Title</h3>
+
+                                    <p class="teacher">
+                                        <i class="fa-solid fa-user"></i>
+                                        @course.InstructorName
+                                    </p>
+
+                                    <div class="course-details">
+
+                                        <span>
+                                            <i class="fa-solid fa-user-group"></i>
+                                            @course.StudentsCount Student
+                                        </span>
+
+                                        <span>
+                                            <i class="fa-solid fa-book-open"></i>
+                                            @course.LessonsCount Lessons
+                                        </span>
+
+                                    </div>
+
+                                    <div class="price">
+
+                                        @if (course.OldPrice.HasValue)
+                                        {
+                                            <del>$@course.OldPrice</del>
+                                        }
+
+                                        <h4 class="text-success fw-bold">$@course.Price</h4>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- Hover -->
+                                <div class="course-hover overflow-hidden">
+
+                                    <span class="author">@course.InstructorName</span>
+
+                                    <h3>@course.Title</h3>
+
+                                    <div class="course-meta">
+
+                                        @if (course.IsBestSeller)
+                                        {
+                                            <span class="best">Bestseller</span>
+                                        }
+
+                                        @if (course.IsHighestRated)
+                                        {
+                                            <span class="best">Highest Rated</span>
+                                        }
+
+                                        <span class="updated">@course.Level</span>
+
+                                    </div>
+
+                                    <p>
+                                        @course.Description
+                                    </p>
+
+                                    <ul>
+
+                                        <li>
+                                            <i class="fa-solid fa-layer-group"></i>
+                                            @course.CategoryName
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-book-open"></i>
+                                            @course.LessonsCount Lessons
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-user-group"></i>
+                                            @course.StudentsCount Students
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-dollar-sign"></i>
+                                            $@course.Price
+                                        </li>
+
+                                    </ul>
+
+                                    <div class="hover-btns">
+
+                                        <a asp-controller="Enrollment"
+                                           asp-action="Confirm"
+                                           asp-route-courseId="@course.Id"
+                                           class="cart-btn">
+
+                                            <i class="fa-solid fa-graduation-cap"></i>
+                                            Enroll Now
+
+                                        </a>
+
+                                        <button class="wish-btn">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                }
+
+
+            </section>
+
+
+
+            <!-- //////////////////////////////////////////////////// -->
+            <!-- mostselling -->
+
+
+            <div class="swiper mySwiper mt-5 ">
+
+                <div class="courses-title">
+
+                    <span>Learn on your schedule</span>
+
+                    <h2 class="big-title">
+                        Most Selling Courses
+
+                    </h2>
+
+                </div>
+
+                <div class="swiper-wrapper mt-5">
+
+                    @foreach (var course in Model.BestSellingCourses)
+                    {
+                        <div class="swiper-slide">
+
+                            <div class="selling-card">
+
+                                <div class="course-img">
+
+                                    <img src="~/Images/@course.ImageUrl" alt="@course.Title">
+
+                                    <div class="course-badges">
+
+                                        @if (course.IsBestSeller)
+                                        {
+                                            <span class="badge orange">Bestseller</span>
+                                        }
+
+                                        @if (course.IsHighestRated)
+                                        {
+                                            <span class="badge orange">Highest Rated</span>
+                                        }
+
+                                        @if (course.DiscountPercentage > 0)
+                                        {
+                                            <span class="badge blue">
+                                                -@course.DiscountPercentage%
+                                            </span>
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                                <div class="course-info">
+
+                                    <span class="level">@course.Level</span>
+
+                                    <h3>@course.Title</h3>
+
+                                    <p class="teacher">
+                                        <i class="fa-solid fa-user"></i>
+                                        @course.InstructorName
+                                    </p>
+
+                                    <div class="course-details">
+
+                                        <span>
+                                            <i class="fa-solid fa-user-group"></i>
+                                            @course.StudentsCount Student
+                                        </span>
+
+                                        <span>
+                                            <i class="fa-solid fa-book-open"></i>
+                                            @course.LessonsCount Lessons
+                                        </span>
+
+                                    </div>
+
+                                    <div class="price">
+
+                                        @if (course.OldPrice.HasValue)
+                                        {
+                                            <del>$@course.OldPrice</del>
+                                        }
+
+                                        <h4>$@course.Price</h4>
+
+                                    </div>
+
+                                </div>
+
+                                <!-- Hover -->
+
+                                <div class="course-hover">
+
+                                    <span class="author">
+                                        @course.InstructorName
+                                    </span>
+
+                                    <h3>@course.Title</h3>
+
+                                    <div class="course-meta">
+
+                                        @if (course.IsBestSeller)
+                                        {
+                                            <span class="best">Bestseller</span>
+                                        }
+
+                                        @if (course.IsHighestRated)
+                                        {
+                                            <span class="best">Highest Rated</span>
+                                        }
+
+                                        <span class="updated">
+                                            @course.Level
+                                        </span>
+
+                                    </div>
+
+                                    <p>
+                                        @course.Description
+                                    </p>
+
+                                    <ul>
+
+                                        <li>
+                                            <i class="fa-solid fa-layer-group"></i>
+                                            @course.CategoryName
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-book-open"></i>
+                                            @course.LessonsCount Lessons
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-user-group"></i>
+                                            @course.StudentsCount Students
+                                        </li>
+
+                                        <li>
+                                            <i class="fa-solid fa-dollar-sign"></i>
+                                            $@course.Price
+                                        </li>
+
+                                    </ul>
+
+                                    <div class="hover-btns">
+
+                                        <a asp-controller="Enrollment"
+                                           asp-action="Confirm"
+                                           asp-route-courseId="@course.Id"
+                                           class="cart-btn">
+
+                                            <i class="fa-solid fa-graduation-cap"></i>
+                                            Enroll Now
+
+                                        </a>
+
+                                        <button class="wish-btn">
+
+                                            <i class="fa-regular fa-heart"></i>
+
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <!-- counter -->
+            <section class="counter">
+
+                <div class="container">
+                    <div class="dots dots-left"></div>
+                    <div class="dots dots-right"></div>
+
+                    <div class="counter-content">
+
+                        <!-- Item 1 -->
+                        <div class="counter-box">
+
+                            <div class="counter-icon purple">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+
+                            <h2 class="counter-number" data-target="7520">0</h2>
+
+                            <p>EXPERT INSTRUCTORS</p>
+
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="counter-box">
+
+                            <div class="counter-icon orange">
+                                <i class="fa-solid fa-earth-americas"></i>
+                            </div>
+
+                            <h2 class="counter-number" data-target="54252">0</h2>
+
+                            <p>FOREIGN FOLLOWERS</p>
+
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="counter-box">
+
+                            <div class="counter-icon blue">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+
+                            <h2 class="counter-number" data-target="97220">0</h2>
+                            <p>STUDENTS ENROLLED</p>
+
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="counter-box">
+
+                            <div class="counter-icon green">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+
+                            <h2 class="counter-number" data-target="20">0</h2>
+                            <p>YEARS OF EXPERIENCE</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+
+            <!-- /////////////////////////////////////////////// -->
+            <!-- feedbacks -->
+
+            <section class="feedbacks">
+                <div class="feedback-title">
+                    <span>Testimonials</span>
+                    <h2 class="big-title">Student's Feedback</h2>
+                </div>
+
+       
+
+                <div class="container">
+
+                    <div class="swiper mySwiper">
+
+                        <div class="swiper-wrapper">
+
+                            <!-- Card 1 -->
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="student">
+                                        <img src="~/Images/kevin.jpg" alt="">
+                                        <div class="student-info">
+                                            <h3>Kevin Martin</h3>
+                                            <p>Student</p>
+                                        </div>
+                                    </div>
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <p class="review">
+                                        Learnio made learning web development simple and enjoyable.
+                                        The instructors explain everything clearly, and the projects
+                                        helped me build real experience.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="student">
+                                        <img src="~/Images/Jacob.jpg" alt="">
+                                        <div class="student-info">
+                                            <h3>Jacob</h3>
+                                            <p>Student</p>
+                                        </div>
+                                    </div>
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <p class="review">
+                                        The UI/UX courses were practical and inspiring.I created my first portfolio with confidence.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="student">
+                                        <img src="img/kevin.jpg" alt="">
+                                        <div class="student-info">
+                                            <h3>Sophia Taylor</h3>
+                                            <p>Student</p>
+                                        </div>
+                                    </div>
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                    <p class="review">
+                                        Professional instructors and high-quality content.
+                                        I highly recommend Learnio to anyone who wants to learn.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 4 -->
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="student">
+                                        <img src="~/Images/michael.jpg" alt="">
+                                        <div class="student-info">
+                                            <h3>Michael</h3>
+                                            <p>Student</p>
+                                        </div>
+                                    </div>
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+
+                                    </div>
+                                    <p class="review">
+                                        Excellent learning experience with real-world examples.
+                                        The lessons were easy to understand and follow.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 5 -->
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="student">
+                                        <img src="~/Images/james.jpg" alt="">
+                                        <div class="student-info">
+                                            <h3>James Anderson</h3>
+                                            <p>Student</p>
+                                        </div>
+                                    </div>
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+
+                                    </div>
+                                    <p class="review">
+                                        The business courses helped me improve my management
+                                        skills and think more strategically.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Card 6 -->
+                            <div class="swiper-slide">
+                                <div class="testimonial-card">
+                                    <div class="student">
+                                        <img src="~/Images/emily.webp" alt="">
+                                        <div class="student-info">
+                                            <h3>Emily Carter</h3>
+                                            <p>Student</p>
+                                        </div>
+                                    </div>
+                                    <div class="stars">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+
+                                    </div>
+                                    <p class="review">
+                                        The UI/UX courses were practical and inspiring.
+                                        I created my first portfolio with confidence.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                </div>
+
+
+            </section>
+
+
+
+
+            <!-- //////////////////////// -->
+
+            <section class="partners">
+                <div class="part-title">
+
+                    <span class="partner-tag">Our Partners</span>
+
+                    <h2>
+                        Top companies choose
+                        <span>Learnio for Business</span>
+                        to build in-demand career skills
+                    </h2>
+
+                    <div class="partner-line"></div>
+
+                </div>
+                <div class="container">
+
+       
+
+                    <div class="partners-logos">
+
+                        <img src="~/Images/1.webp" alt="">
+                        <img src="~/Images/1.webp" alt="">
+                        <img src="~/Images/1.webp" alt="">
+                        <img src="~/Images/1.webp" alt="">
+                        <img src="~/Images/1.webp" alt="">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- /////////////////////////////// -->
+            <section class="join-us">
+
+                <div class="container">
+
+                    <!-- Card 1 -->
+
+                    <div class="join-card">
+
+                        <img src="~/Images/ins.jpg" alt="">
+
+                        <h3>Become an Instructor</h3>
+
+                        <p>
+                            Teach what you love. Learnio gives you the tools to create a course.
+                        </p>
+
+                        <a href="#">
+                            <i class="fa-regular fa-user"></i>
+                            Start Teaching
+                        </a>
+
+                    </div>
+
+                    <!-- Card 2 -->
+
+                    <div class="join-card">
+
+                        <img src="~/Images/lea.jpg" alt="">
+
+                        <h3>Become a Learner</h3>
+
+                        <p>
+                            Learn what you love! Transform your life through education.
+                        </p>
+
+                        <a href="#">
+                            <i class="fa-regular fa-file-lines"></i>
+                            Start Learning
+                        </a>
+
+                    </div>
+
+                    <!-- Card 3 -->
+
+                    <div class="join-card">
+
+                        <img src="~/Images/learnio.jpg" alt="">
+
+                        <h3>Learnio for Business</h3>
+
+                        <p>
+                            Get unlimited access to thousands of courses for your team.
+                        </p>
+
+                        <a href="#">
+                            <i class="fa-solid fa-briefcase"></i>
+                            Get Learnio for Business
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+     
+ 
+
+            <!-- //////////////////////////////////////// -->
+            <!-- newsletter section -->
+
+            <section class="newsletter">
+
+                <div class="container">
+                    <div class="newsletter-content">
+                        <div class="newsletter-text">
+                            <span>Newsletter</span>
+                            <h2>Subscribe to our Newsletter</h2>
+                            <p>Stay in the know on new free e-book.</p>
+                        </div>
+
+                        <div class="newsletter-form">
+                            <form>
+                                <input type="email" placeholder="Enter your email">
+                                <button>
+                                    Subscribe
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </form>
+                            <small>
+                                <i class="fa-solid fa-lock"></i>
+                                Your information is safe with us.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+
+            <!-- footeerrrrrrr -->
+            <div class="footer">
+                <div class="footer-container">
+                    <div class="footer-about">
+                        <div class="footer-logo">
+                            <img src="~/Images/finallooogggggooo.png" alt="">
+                            <h2>Learnio</h2>
+                        </div>
+
+                        <p><i class="fa-solid fa-phone"></i> +20 100 000 0000</p>
+
+                        <p><i class="fa-solid fa-envelope"></i> support@learnio.com</p>
+
+                        <p>
+                            <i class="fa-solid fa-location-dot"></i>
+                            Cairo, Egypt
+                        </p>
+                        <h3>We are on</h3>
+                        <div class="social-icons">
+                            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                        </div>
+
+                    </div>
+
+                    <div class="footer-links">
+                        <h3 class="footer-title">Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a asp-controller="Account" asp-action="Register">Become an Instructor</a></li>
+                            <li><a href="#">FAQs</a></li>
+                        </ul>
+
+                    </div>
+                    <div class="footer-links">
+                        <h3 class="footer-title">Courses</h3>
+                        <ul>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">UI / UX</a></li>
+                            <li><a href="#">Data Science</a></li>
+                            <li><a href="#">Business</a></li>
+                            <li><a href="#">Artificial Intelligence</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-apps">
+                        <h3 class="footer-title">Download App</h3>
+                        <p>
+                            Download our mobile app and
+                            learn on the go.
+                        </p>
+                        <img src="~/Images/app store.png" alt="App Store">
+                        <img src="~/Images/goagle play.png" alt="Google Play">
+                    </div>
+
+   
+    
+                </div>
+                <hr>
+                <div class="footer-bottom">
+                    <p>© 2026 Learnio. All Rights Reserved.</p>
+                    <div class="bottom-links">
+                        <a href="#">Terms & Conditions</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+
+
+                </div>
+            </div>
+
+     
+
+        </div>
+
+    </div>
+
+    <div class="video-popup" id="videoPopup">
+
+        <div class="video-box">
+
+            <span class="close-btn" id="closeVideo">&times;</span>
+
+            <iframe id="videoFrame"
+                    width="100%"
+                    height="500"
+                    src=""
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </div>
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+﻿@model CourseManagment.BLL.ViewModels.CategoriesVM.CategoryDetailsViewModel
+
+@{
+    ViewData["Title"] = "Category Details";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">Category Details</h2>
+            <p class="text-muted">
+                View complete information about this category.
+            </p>
+        </div>
+
+        <div>
+
+            <a asp-action="CategoryEdit"
+               asp-route-id="@Model.Id"
+               class="btn btn-warning me-2">
+
+                <i class="fa-solid fa-pen"></i>
+                Edit
+
+            </a>
+
+            <a asp-action="CategoryManagement"
+               class="btn btn-outline-secondary">
+
+                <i class="fa-solid fa-arrow-left"></i>
+                Back
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <!-- Category Info -->
+        <div class="col-lg-5">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h5 class="mb-0">
+
+                        <i class="fa-solid fa-folder me-2"></i>
+
+                        Category Information
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-4">
+                        <h6 class="text-muted">Category Image</h6>
+
+                        <img src="~/Images/@Model.Image"
+                             alt="@Model.Name"
+                             class="img-fluid rounded shadow-sm"
+                             style="max-height:250px; object-fit:cover;" />
+                    </div>
+
+                    <div class="mb-4">
+
+                        <h6 class="text-muted">Category Name</h6>
+
+                        <h4>@Model.Name</h4>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <h6 class="text-muted">Description</h6>
+
+                        <p class="mb-0">
+
+                            @Model.Description
+
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <h6 class="text-muted">Courses Count</h6>
+
+                        <span class="badge bg-primary fs-6">
+
+                            @Model.CoursesCount Course(s)
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Courses -->
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-light">
+
+                    <h5 class="mb-0">
+
+                        <i class="fa-solid fa-book-open me-2"></i>
+
+                        Courses in this Category
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body p-0">
+
+                    @if (Model.Courses.Any())
+                    {
+                        <div class="table-responsive">
+
+                            <table class="table table-hover mb-0">
+
+                                <thead class="table-light">
+
+                                    <tr>
+
+                                        <th>Course</th>
+
+                                        <th>Instructor</th>
+
+                                        <th>Price</th>
+
+                                        <th>Enrollments</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var item in Model.Courses)
+                                    {
+                                        <tr>
+
+                                            <td>
+
+                                                <strong>@item.Title</strong>
+
+                                            </td>
+
+                                            <td>
+
+                                                @item.InstructorName
+
+                                            </td>
+
+                                            <td>
+
+                                                $@item.Price
+
+                                            </td>
+
+                                            <td>
+
+                                                <span class="badge bg-success">
+
+                                                    @item.StudentsCount
+
+                                                </span>
+
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+
+                            <i class="fa-solid fa-book fs-1 text-secondary"></i>
+
+                            <h5 class="mt-3">
+
+                                No Courses Found
+
+                            </h5>
+
+                            <p class="text-muted">
+
+                                This category doesn't contain any courses yet.
+
+                            </p>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

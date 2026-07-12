@@ -1,0 +1,14 @@
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\bin\Release\net8.0\CourseManagment.DAL.deps.json
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\bin\Release\net8.0\CourseManagment.DAL.runtimeconfig.json
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\bin\Release\net8.0\CourseManagment.DAL.dll
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\bin\Release\net8.0\CourseManagment.DAL.pdb
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\CourseManagment.DAL.csproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\CourseManagment.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\CourseManagment.DAL.AssemblyInfoInputs.cache
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\CourseManagment.DAL.AssemblyInfo.cs
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\CourseManagment.DAL.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\CourseManagment.DAL.dll
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\refint\CourseManagment.DAL.dll
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\CourseManagment.DAL.pdb
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\CourseManagment.DAL.genruntimeconfig.cache
+C:\Users\DELL\source\repos\CourseManagmentSystem\CourseManagment.DAL\obj\Release\net8.0\ref\CourseManagment.DAL.dll

@@ -1,0 +1,426 @@
+﻿@model CourseManagment.BLL.ViewModels.ProfileVm.ProfileViewModel
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-1 " asp-controller="Home" asp-action="Index">
+            Learnio
+        </a>
+
+        <!-- Mobile Button -->
+        <button class="navbar-toggler border-0" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <!-- Categories -->
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle fw-semibold"
+                       href="#"
+                       data-bs-toggle="dropdown">
+                        Categories
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Development</a></li>
+                        <li><a class="dropdown-item" href="#">IT & Software</a></li>
+                        <li><a class="dropdown-item" href="#">UI / UX Design</a></li>
+                        <li><a class="dropdown-item" href="#">Data Science</a></li>
+                        <li><a class="dropdown-item" href="#">Artificial Intelligence</a></li>
+                        <li><a class="dropdown-item" href="#">Business</a></li>
+                        <li><a class="dropdown-item" href="#">Software Testing</a></li>
+                        <li><a class="dropdown-item" href="#">Personal Development</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Search -->
+            <form class="d-flex flex-grow-1 mx-lg-4 my-3 my-lg-0">
+
+                <div class="input-group">
+
+                    <input type="text"
+                           class="form-control rounded-start-pill border-end-0"
+                           placeholder="What do you want to learn?">
+
+                    <button class="btn btn-success rounded-end-pill px-4">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
+                </div>
+
+            </form>
+
+            <!-- Links -->
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Course" asp-action="Index">Courses</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Enrollment" asp-action="MyLearning">My Coursers</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Profile" asp-action="Index">Profile</a>
+                </li>
+
+
+            </ul>
+
+            <!-- Actions -->
+            <div class="d-flex align-items-center ms-lg-3">
+
+                <a asp-controller="Account" asp-action="Login" class="nav-link fw-semibold me-3">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Login
+                </a>
+
+                <a asp-controller="Account" asp-action="Register" class="btn  register-btn rounded-3 px-4">
+                    <i class="fa-regular fa-user me-1"></i>
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+<div class="container py-5">
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Success"]
+            <button class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Profile Card -->
+    <div class="card border-0 shadow rounded-4 mb-5">
+
+        <div class="bg-success rounded-top-4"
+             style="height:180px;">
+        </div>
+
+        <div class="card-body text-center">
+
+            <img src="@(string.IsNullOrEmpty(Model.ImageUrl)
+                         ? Url.Content("~/images/default-user.png")
+                         : Url.Content(Model.ImageUrl))"
+                 class="rounded-circle border border-4 border-white shadow"
+                 width="150"
+                 height="150"
+                 style="margin-top:-90px;object-fit:cover;" />
+
+            <h2 class="fw-bold mt-3">
+                @Model.FullName
+            </h2>
+
+            <p class="text-muted">
+                @Model.Email
+            </p>
+
+            <small class="text-secondary">
+                Member Since
+                @Model.CreatedAt.ToString("MMMM yyyy")
+            </small>
+
+            <div class="mt-4">
+
+                <a asp-action="Edit"
+                   class="btn btn-success me-2">
+
+                    <i class="fa-solid fa-user-pen"></i>
+
+                    Edit Profile
+
+                </a>
+
+                <a asp-controller="Account" asp-action="ResetPassword"
+                   class="btn btn-outline-dark">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Change Password
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h1 class="text-success fw-bold">
+                        @Model.TotalEnrollments
+                    </h1>
+
+                    <h5>Total Enrollments</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h1 class="text-primary fw-bold">
+                        @Model.ActiveCourses
+                    </h1>
+
+                    <h5>Active Courses</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-body text-center">
+
+                    <h1 class="text-warning fw-bold">
+                        @Model.CompletedCourses
+                    </h1>
+
+                    <h5>Completed Courses</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <!-- Personal Information -->
+
+        <div class="col-lg-5 mb-4">
+
+            <div class="card shadow border-0 rounded-4 h-100">
+
+                <div class="card-header bg-white">
+
+                    <h4 class="mb-0">
+
+                        Personal Information
+
+                    </h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-borderless">
+
+                        <tr>
+
+                            <th>Name</th>
+
+                            <td>@Model.FullName</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>Email</th>
+
+                            <td>@Model.Email</td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>Phone</th>
+
+                            <td>@Model.Phone</td>
+
+                        </tr>
+
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Recent Courses -->
+
+        <div class="col-lg-7">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-white">
+
+                    <h4 class="mb-0">
+
+                        Recent Courses
+
+                    </h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    @if (Model.RecentCourses.Any())
+                    {
+                        @foreach (var item in Model.RecentCourses)
+                        {
+                            <div class="d-flex align-items-center mb-4">
+
+                                <img src="~/Images/@item.ImageUrl"
+                                     width="80"
+                                     height="80"
+                                     class="rounded-3 shadow-sm"
+                                     style="object-fit:cover;" />
+
+                                <div class="ms-3 flex-grow-1">
+
+                                    <h5 class="mb-1">
+
+                                        @item.Title
+
+                                    </h5>
+
+                                    <small class="text-muted">
+
+                                        Enrolled :
+                                        @item.EnrollmentDate.ToShortDateString()
+
+                                    </small>
+
+                                </div>
+
+                                <a asp-controller="Course"
+                                   asp-action="Details"
+                                   asp-route-id="@item.CourseId"
+                                   class="btn btn-success">
+
+                                    View
+
+                                </a>
+
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+
+                            <h5 class="text-muted">
+
+                                No Courses Yet
+
+                            </h5>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    <div class="footer-container">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <img src="~/img/finallooogggggooo.png" alt="">
+                <h2>Learnio</h2>
+            </div>
+            <p><i class="fa-solid fa-phone"></i> +20 100 000 0000</p>
+            <p><i class="fa-solid fa-envelope"></i> support@learnio.com</p>
+            <p><i class="fa-solid fa-location-dot"></i> Cairo, Egypt</p>
+            <h3>We are on</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <h3 class="footer-title">Company</h3>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Become an Instructor</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h3 class="footer-title">Courses</h3>
+            <ul>
+                <li><a href="#">Web Development</a></li>
+                <li><a href="#">UI / UX</a></li>
+                <li><a href="#">Data Science</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Artificial Intelligence</a></li>
+            </ul>
+        </div>
+        <div class="footer-apps">
+            <h3 class="footer-title">Download App</h3>
+            <p>Download our mobile app and learn on the go.</p>
+            <img src="~/Images/app store.png" alt="App Store">
+            <img src="~/Images/goagle play.png" alt="Google Play">
+        </div>
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2026 Learnio. All Rights Reserved.</p>
+        <div class="bottom-links">
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+</div>

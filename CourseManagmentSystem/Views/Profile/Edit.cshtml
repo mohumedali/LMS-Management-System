@@ -1,0 +1,178 @@
+﻿@model CourseManagment.BLL.ViewModels.ProfileVm.EditProfileViewModel
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-success text-white py-3">
+
+                    <h3 class="mb-0">
+                        <i class="fa-solid fa-user-pen me-2"></i>
+                        Edit Profile
+                    </h3>
+
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+                        <input asp-for="Id" type="hidden" />
+
+                        <!-- keeps the current image if the user doesn't upload a new one -->
+                        <input asp-for="ImageUrl" type="hidden" />
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger">
+                        </div>
+
+                        <!-- Image -->
+
+                        <div class="text-center mb-4">
+
+                            <img id="preview"
+                                 src="@(string.IsNullOrEmpty(Model.ImageUrl) ? "/images/default-user.png" : Model.ImageUrl)"
+                                 width="140"
+                                 height="140"
+                                 class="rounded-circle shadow border"
+                                 style="object-fit:cover;" />
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label asp-for="ImageFile"
+                                   class="form-label fw-semibold">
+                                Profile Image
+                            </label>
+
+                            <input asp-for="ImageFile"
+                                   id="imageInput"
+                                   type="file"
+                                   accept="image/*"
+                                   class="form-control" />
+
+                            <span asp-validation-for="ImageFile"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Full Name -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="FullName"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="FullName"
+                                   class="form-control form-control-lg" />
+
+                            <span asp-validation-for="FullName"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Email -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Email"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="Email"
+                                   class="form-control form-control-lg" />
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Phone -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Phone"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="Phone"
+                                   class="form-control form-control-lg" />
+
+                            <span asp-validation-for="Phone"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+
+                            <a asp-action="Index"
+                               class="btn btn-outline-secondary px-4">
+
+                                <i class="fa-solid fa-arrow-left"></i>
+
+                                Back
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-success px-5">
+
+                                <i class="fa-solid fa-floppy-disk"></i>
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        const input = document.getElementById('imageInput');
+        const preview = document.getElementById('preview');
+
+        input.addEventListener('change', function () {
+
+            if (this.files && this.files[0]) {
+
+                const reader = new FileReader();
+
+                reader.onload = e => preview.src = e.target.result;
+
+                reader.readAsDataURL(this.files[0]);
+            }
+
+        });
+
+    </script>
+
+}

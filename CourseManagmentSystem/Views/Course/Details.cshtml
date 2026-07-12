@@ -1,0 +1,910 @@
+﻿@model CourseManagment.BLL.ViewModels.CoursesVM.CourseDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-1 " asp-controller="Home" asp-action="Index">
+            Learnio
+        </a>
+
+        <!-- Mobile Button -->
+        <button class="navbar-toggler border-0" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <!-- Categories -->
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle fw-semibold"
+                       href="#"
+                       data-bs-toggle="dropdown">
+                        Categories
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Development</a></li>
+                        <li><a class="dropdown-item" href="#">IT & Software</a></li>
+                        <li><a class="dropdown-item" href="#">UI / UX Design</a></li>
+                        <li><a class="dropdown-item" href="#">Data Science</a></li>
+                        <li><a class="dropdown-item" href="#">Artificial Intelligence</a></li>
+                        <li><a class="dropdown-item" href="#">Business</a></li>
+                        <li><a class="dropdown-item" href="#">Software Testing</a></li>
+                        <li><a class="dropdown-item" href="#">Personal Development</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Search -->
+            <form class="d-flex flex-grow-1 mx-lg-4 my-3 my-lg-0">
+
+                <div class="input-group">
+
+                    <input type="text"
+                           class="form-control rounded-start-pill border-end-0"
+                           placeholder="What do you want to learn?">
+
+                    <button class="btn btn-success rounded-end-pill px-4">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
+                </div>
+
+            </form>
+
+            <!-- Links -->
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Course" asp-action="Index">Courses</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Enrollment" asp-action="MyLearning">My Coursers</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Profile" asp-action="Index">Profile</a>
+                </li>
+
+
+            </ul>
+
+            <!-- Actions -->
+            <div class="d-flex align-items-center ms-lg-3">
+
+                <a asp-controller="Account" asp-action="Login" class="nav-link fw-semibold me-3">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Login
+                </a>
+
+                <a asp-controller="Account" asp-action="Register" class="btn  register-btn rounded-3 px-4">
+                    <i class="fa-regular fa-user me-1"></i>
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+<div class="container mt-5">
+
+    <div class="row">
+
+        <!-- Left -->
+
+        <div class="col-lg-8">
+
+            <img src="~/Images/@Model.ImageUrl"
+                 class="img-fluid rounded shadow mb-4 w-100"
+                 style="height:420px;object-fit:cover;">
+
+            <h2 class="fw-bold">
+                @Model.Title
+            </h2>
+
+            <div class="mb-3">
+
+                <span class="badge bg-success">
+                    @Model.Category
+                </span>
+
+                <span class="badge bg-warning text-dark">
+                    @Model.Level
+                </span>
+
+            </div>
+
+            <p class="text-muted fs-5">
+
+                @Model.Description
+
+            </p>
+
+            <hr />
+
+            <h4 class="fw-bold mb-3">
+
+                Course Content
+
+            </h4>
+
+            <div class="accordion" id="lessonAccordion">
+
+                @foreach (var lesson in Model.Lessons)
+                {
+                    <div class="accordion-item">
+
+                        <h2 class="accordion-header">
+
+                            <button class="accordion-button collapsed"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#lesson@lesson.Id">
+
+                                @lesson.Title
+
+                            </button>
+
+                        </h2>
+
+                        <div id="lesson@lesson.Id"
+                             class="accordion-collapse collapse"
+                             data-bs-parent="#lessonAccordion">
+
+                            <div class="accordion-body">
+
+                                <span class="badge bg-info">
+
+                                    @lesson.Duration
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+
+            <hr class="my-5" />
+
+            <h4 class="fw-bold">
+
+                Reviews (@Model.ReviewsCount)
+
+            </h4>
+
+            @foreach (var review in Model.Reviews)
+            {
+                <div class="card shadow-sm border-0 mb-3">
+
+                    <div class="card-body">
+
+                        <h6 class="fw-bold">
+
+                            @review.StudentName
+
+                        </h6>
+
+                        <div class="text-warning">
+
+                            @for (int i = 0; i < review.Rating; i++)
+                            {
+                                <i class="bi bi-star-fill"></i>
+                            }
+
+                        </div>
+
+                        <p class="mt-2">
+
+                            @review.Comment
+
+                        </p>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+        <!-- Right -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow position-sticky">
+
+                <div class="card-body">
+
+                    <h2 class="text-success fw-bold">
+
+                        $@Model.Price
+
+                    </h2>
+
+                    <div class="mb-3">
+
+                        <strong>
+
+                            ⭐ @Model.AverageRating.ToString("0.0")
+
+                        </strong>
+
+                        (@Model.ReviewsCount Reviews)
+
+                    </div>
+
+                    <a asp-controller="Enrollment"
+                       asp-action="Confirm"
+                       asp-route-courseId="@Model.Id"
+                       class="btn btn-success w-100 mb-2">
+                        Enroll Now
+                    </a>
+                    <a asp-controller="course"
+                       asp-action="Index"
+                       class="btn btn-secondary w-100 mb-2">
+                        Back To Courses
+                    </a>
+
+                    <hr />
+
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item">
+
+                            <i class="bi bi-clock"></i>
+
+                            Duration :
+                            @Model.Duration hrs
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <i class="bi bi-globe"></i>
+
+                            Language :
+                            @Model.Language
+
+                        </li>
+
+                        <li class="list-group-item">
+
+                            <i class="bi bi-person"></i>
+
+                            InstructorName :
+                            @Model.InstructorName
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="card mt-4 shadow">
+
+                <div class="card-body text-center">
+
+                    <img src="~/Images/@Model.InstructorImage"
+                         class="rounded-circle mb-3"
+                         width="110"
+                         height="110">
+
+                    <h5>
+
+                        @Model.InstructorName
+
+                    </h5>
+
+                    <p class="text-muted">
+
+                        @Model.InstructorBio
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- footeerrrrrrr -->
+<div class="footer">
+    <div class="footer-container">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <img src="img/finallooogggggooo.png" alt="">
+                <h2>Learnio</h2>
+            </div>
+
+            <p><i class="fa-solid fa-phone"></i> +20 100 000 0000</p>
+
+            <p><i class="fa-solid fa-envelope"></i> support@learnio.com</p>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Cairo, Egypt
+            </p>
+            <h3>We are on</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+
+        </div>
+
+        <div class="footer-links">
+            <h3 class="footer-title">Company</h3>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Become an Instructor</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+
+        </div>
+        <div class="footer-links">
+            <h3 class="footer-title">Courses</h3>
+            <ul>
+                <li><a href="#">Web Development</a></li>
+                <li><a href="#">UI / UX</a></li>
+                <li><a href="#">Data Science</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Artificial Intelligence</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-apps">
+            <h3 class="footer-title">Download App</h3>
+            <p>
+                Download our mobile app and
+                learn on the go.
+            </p>
+            <img src="~/Images/app store.png" alt="App Store">
+            <img src="~/Images/goagle play.png" alt="Google Play">
+        </div>
+
+   
+    
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2026 Learnio. All Rights Reserved.</p>
+        <div class="bottom-links">
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+
+
+    </div>
+</div>
+
+     
+
+</div>
+
+</div>
+
+<div class="video-popup" id="videoPopup">
+
+    <div class="video-box">
+
+        <span class="close-btn" id="closeVideo">&times;</span>
+
+        <iframe id="videoFrame"
+                width="100%"
+                height="500"
+                src=""
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+        </iframe>
+
+    </div>
+
+</div>
+
+
+
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Poppins", sans-serif;
+    }
+
+    .footer {
+        /* background:#e9f2f1; */
+        padding: 80px 0 20px;
+    }
+
+    .footer-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .footer-about, .footer-links, .footer-apps {
+        flex: 1;
+    }
+
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 30px;
+    }
+
+        .footer-logo img {
+            width: 55px;
+        }
+
+        .footer-logo h2 {
+            font-family: "Outfit", sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #0F766E;
+        }
+
+    .footer-title {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 35px;
+        font-weight: 500;
+        color: #0F766E;
+        font-size: 25px;
+    }
+
+
+
+
+    .footer-about p {
+        color: #333;
+        ;
+        margin-bottom: 18px;
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+        .footer-about p i {
+            color: #333;
+            ;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+    .footer-about h3 {
+        margin: 30px 0 12px;
+        font-size: 25px;
+        color: #333;
+        ;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 15px;
+    }
+
+        .social-icons a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #0F766E;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: .4s;
+        }
+
+
+    .footer-title::before,
+    .footer-title::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        height: 4px;
+        background: #0F766E;
+        border-radius: 10px;
+    }
+
+    .footer-title::before {
+        width: 18px;
+        left: 0;
+        animation: line1 2s infinite alternate ease-in-out;
+    }
+
+    .footer-title::after {
+        width: 40px;
+        left: 24px;
+        animation: line2 2s infinite alternate ease-in-out;
+    }
+
+    keyframes line1 {
+        from {
+            left: 0;
+        }
+
+        to {
+            left: 45px;
+        }
+    }
+
+    keyframes line2 {
+        from {
+            left: 24px;
+        }
+
+        to {
+            left: 0;
+        }
+    }
+
+
+    .social-icons a:hover {
+        background: #134e4a;
+        transform: translateY(-5px);
+    }
+
+    .footer-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 15px 0 0;
+    }
+
+        .footer-links ul li {
+            margin-bottom: 18px;
+        }
+
+            .footer-links ul li a {
+                display: block;
+                text-decoration: none;
+                color: #333;
+                font-size: 17px;
+                transition: .3s;
+            }
+
+                .footer-links ul li a:hover {
+                    color: #0F766E;
+                    padding-left: 8px;
+                }
+
+    .footer-apps p {
+        color: #333;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    .footer-apps img {
+        width: 170px;
+        display: block;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+        .footer-apps img:hover {
+            transform: scale(1.05);
+        }
+
+    .footer hr {
+        width: 90%;
+        margin: 60px auto 25px;
+        border: none;
+        height: 1px;
+        background: #adb6b4;
+    }
+
+    .footer-bottom {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .footer-bottom p {
+            color: #6b7280;
+        }
+
+    .bottom-links {
+        display: flex;
+        gap: 30px;
+    }
+
+        .bottom-links a {
+            text-decoration: none;
+            color: #6b7280;
+            transition: .3s;
+        }
+
+            .bottom-links a:hover {
+                color: #0F766E;
+            }
+
+
+
+
+
+    /* ================= Tablet ================= */
+
+    @@media (max-width:992px) {
+
+        .footer {
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .footer-about,
+        .footer-links,
+        .footer-apps {
+            flex: 0 0 calc(50% - 25px);
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .bottom-links {
+            justify-content: center;
+        }
+    }
+
+
+    /* ================= Mobile ================= */
+
+    @@media (max-width:768px) {
+
+        .footer {
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            flex-direction: column;
+            gap: 45px;
+        }
+
+        .footer-about,
+        .footer-links,
+        .footer-apps {
+            width: 100%;
+        }
+
+        .footer-logo {
+            justify-content: center;
+        }
+
+        .footer-about {
+            text-align: center;
+        }
+
+            .footer-about p {
+                justify-content: center;
+            }
+
+        .social-icons {
+            justify-content: center;
+        }
+
+        .footer-links {
+            text-align: center;
+        }
+
+        .footer-title {
+            display: inline-block;
+        }
+
+        .footer-links ul li a:hover {
+            padding-left: 0;
+        }
+
+        .footer-apps {
+            text-align: center;
+        }
+
+            .footer-apps img {
+                margin: 15px auto;
+            }
+
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+            gap: 15px;
+        }
+
+        .bottom-links {
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+    }
+
+
+    /* ================= Small Mobile ================= */
+
+    @@media (max-width:480px) {
+
+        .footer-logo h2 {
+            font-size: 32px;
+        }
+
+        .footer-title {
+            font-size: 22px;
+        }
+
+        .footer-about h3 {
+            font-size: 22px;
+        }
+
+        .footer-about p,
+        .footer-links a,
+        .footer-apps p {
+            font-size: 16px;
+        }
+
+        .footer-apps img {
+            width: 150px;
+        }
+
+        .social-icons a {
+            width: 42px;
+            height: 42px;
+        }
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+
+
+    body {
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+    }
+
+    .navbar-brand {
+        color: #0F766E !important;
+        font-size: 42px;
+    }
+
+    .nav-link {
+        color: #333;
+    }
+
+        .nav-link:hover {
+            color: #0F766E;
+        }
+
+    .input-group {
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .form-control {
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #0F766E;
+        }
+
+    /* Login */
+    .navbar .nav-link {
+        color: #2b3645;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+        .navbar .nav-link:hover {
+            color: #0F766E;
+        }
+
+
+
+    .navbar .register-btn {
+        color: #0F766E;
+        border: 2px solid #0F766E;
+        background: transparent;
+        transition: 0.3s;
+    }
+
+        .navbar .register-btn:hover {
+            background: #c5e3dc;
+            color: #0F766E;
+            border: 2px solid #0F766E;
+        }
+
+    .course-hero {
+        border-radius: 20px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 16px;
+    }
+
+    .accordion-button {
+        font-weight: 600;
+    }
+
+    .accordion-item {
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    .list-group-item {
+        border: none;
+        padding: 15px 0;
+    }
+
+    /* .sticky-top {
+            z-index: 1;
+        } */
+
+    .btn-primary {
+        border-radius: 12px;
+    }
+
+    .btn-outline-dark {
+        border-radius: 12px;
+    }
+
+    .rounded-circle {
+        object-fit: cover;
+    }
+
+    .card:hover {
+        transition: .3s;
+        transform: translateY(-2px);
+    }
+</style>

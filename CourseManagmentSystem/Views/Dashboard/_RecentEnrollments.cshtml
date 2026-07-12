@@ -1,0 +1,236 @@
+﻿@model CourseManagment.BLL.ViewModels.DashboardVM.DashboardViewModel
+
+<div class="card dashboard-card border-0 shadow-sm">
+
+    <div class="card-header bg-white border-0 py-3">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h5 class="fw-bold mb-1">
+                    Recent Enrollments
+                </h5>
+
+                <small class="text-muted">
+                    Latest enrolled students
+                </small>
+
+            </div>
+
+            <a asp-controller="Enrollment"
+               asp-action="Index"
+               class="btn btn-primary btn-sm px-3">
+
+                View All
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table enrollment-table align-middle mb-0">
+
+            <thead>
+
+                <tr>
+
+                    <th>Student</th>
+
+                    <th>Course</th>
+
+                    <th>Date</th>
+
+                    <th>Status</th>
+
+                    <th></th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model.RecentEnrollments)
+                {
+                    <tr>
+
+                        <td>
+
+                            <div class="d-flex align-items-center">
+
+                                <div class="avatar">
+
+                                    @item.StudentName[0]
+
+                                </div>
+
+                                <div class="ms-3">
+
+                                    <h6 class="mb-0 fw-semibold">
+
+                                        @item.StudentName
+
+                                    </h6>
+
+                                    <small class="text-muted">
+
+                                        Student
+
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+
+                            <span class="fw-medium">
+
+                                @item.CourseTitle
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            @item.EnrollmentDate.ToString("dd MMM yyyy")
+
+                        </td>
+
+                        <td>
+
+                            @switch (item.Status)
+                            {
+                                case CourseManagment.DAL.Enums.EnrollmentStatus.Active:
+
+                                    <span class="badge badge-active">
+
+                                        Active
+
+                                    </span>
+
+                                    break;
+
+                                case CourseManagment.DAL.Enums.EnrollmentStatus.Completed:
+
+                                    <span class="badge badge-completed">
+
+                                        Completed
+
+                                    </span>
+
+                                    break;
+
+                                default:
+
+                                    <span class="badge badge-cancelled">
+
+                                        Cancelled
+
+                                    </span>
+
+                                    break;
+                            }
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<style>
+    .enrollment-table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .enrollment-table thead {
+            background: #f8fafc;
+        }
+
+            .enrollment-table thead th {
+                color: #64748b;
+                font-weight: 700;
+                font-size: 14px;
+                border: none;
+                padding: 18px 22px;
+                text-transform: uppercase;
+                letter-spacing: .5px;
+            }
+
+        .enrollment-table tbody td {
+            border-top: 1px solid #eef2f7;
+            padding: 18px 22px;
+            vertical-align: middle;
+        }
+
+        .enrollment-table tbody tr {
+            transition: .25s;
+        }
+
+            .enrollment-table tbody tr:hover {
+                background: #f8fbff;
+            }
+
+    .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg,#2563eb,#4f46e5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: 700;
+        font-size: 18px;
+        box-shadow: 0 5px 12px rgba(37,99,235,.25);
+    }
+
+    .badge {
+        padding: 8px 18px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .badge-active {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .badge-completed {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+    .badge-cancelled {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .enrollment-table .btn-light {
+        border-radius: 10px;
+        width: 38px;
+        height: 38px;
+        border: 1px solid #e5e7eb;
+    }
+
+        .enrollment-table .btn-light:hover {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+</style>

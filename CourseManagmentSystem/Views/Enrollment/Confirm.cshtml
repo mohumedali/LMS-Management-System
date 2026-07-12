@@ -1,0 +1,359 @@
+﻿@model CourseManagment.BLL.ViewModels.CoursesVM.CourseDetailsViewModel
+
+@{
+    ViewData["Title"] = "Enroll Course";
+}
+
+<nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top py-3">
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold fs-1 " asp-controller="Home" asp-action="Index">
+            Learnio
+        </a>
+
+        <!-- Mobile Button -->
+        <button class="navbar-toggler border-0" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <!-- Categories -->
+            <ul class="navbar-nav ms-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle fw-semibold"
+                       href="#"
+                       data-bs-toggle="dropdown">
+                        Categories
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Development</a></li>
+                        <li><a class="dropdown-item" href="#">IT & Software</a></li>
+                        <li><a class="dropdown-item" href="#">UI / UX Design</a></li>
+                        <li><a class="dropdown-item" href="#">Data Science</a></li>
+                        <li><a class="dropdown-item" href="#">Artificial Intelligence</a></li>
+                        <li><a class="dropdown-item" href="#">Business</a></li>
+                        <li><a class="dropdown-item" href="#">Software Testing</a></li>
+                        <li><a class="dropdown-item" href="#">Personal Development</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Search -->
+            <form class="d-flex flex-grow-1 mx-lg-4 my-3 my-lg-0">
+
+                <div class="input-group">
+
+                    <input type="text"
+                           class="form-control rounded-start-pill border-end-0"
+                           placeholder="What do you want to learn?">
+
+                    <button class="btn btn-success rounded-end-pill px-4">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
+                </div>
+
+            </form>
+
+            <!-- Links -->
+            <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Course" asp-action="Index">Courses</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Enrollment" asp-action="MyLearning">My Coursers</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link fw-semibold" asp-controller="Profile" asp-action="Index">Profile</a>
+                </li>
+
+
+            </ul>
+
+            <!-- Actions -->
+            <div class="d-flex align-items-center ms-lg-3">
+
+                <a asp-controller="Account" asp-action="Login" class="nav-link fw-semibold me-3">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Login
+                </a>
+
+                <a asp-controller="Account" asp-action="Register" class="btn  register-btn rounded-3 px-4">
+                    <i class="fa-regular fa-user me-1"></i>
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+
+<div class="container py-5">
+
+
+
+    <div class="row g-4">
+
+        <!-- Course Image -->
+        <div class="col-lg-5">
+
+            <div class="card border-0 shadow course-card">
+
+                <img src="~/Images/@Model.ImageUrl"
+                     asp-append-version="true"
+                     class="card-img-top"
+                     style="height:320px;object-fit:cover;">
+
+            </div>
+
+        </div>
+
+        <!-- Course Info -->
+        <div class="col-lg-7">
+
+            <div class="card border-0 shadow h-100">
+
+                <div class="card-body p-4">
+
+                    <span class="badge bg-success mb-3 px-3 py-2">
+                        @Model.Category
+                    </span>
+
+                    <h2 class="fw-bold mb-3">
+                        @Model.Title
+                    </h2>
+
+                    <p class="text-muted mb-4">
+                        @Model.Description
+                    </p>
+
+                    <hr />
+
+                    <div class="row gy-3">
+
+                        <div class="col-md-6">
+
+                            <h6 class="text-muted mb-1">
+                                Instructor
+                            </h6>
+
+                            <p class="fw-semibold">
+                                <i class="bi bi-person-circle me-2 text-primary"></i>
+                                @Model.InstructorName
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <h6 class="text-muted mb-1">
+                                Duration
+                            </h6>
+
+                            <p class="fw-semibold">
+                                <i class="bi bi-clock me-2 text-primary"></i>
+                                @Model.Duration Hours
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <h6 class="text-muted mb-1">
+                                Language
+                            </h6>
+
+                            <p class="fw-semibold">
+                                <i class="bi bi-translate me-2 text-primary"></i>
+                                @Model.Language
+                            </p>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <h6 class="text-muted mb-1">
+                                Level
+                            </h6>
+
+                            <p class="fw-semibold">
+                                <i class="bi bi-bar-chart-fill me-2 text-primary"></i>
+                                @Model.Level
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <small class="text-muted">
+                                Course Price
+                            </small>
+
+                            <h2 class="text-success fw-bold mb-0">
+                                $@Model.Price
+                            </h2>
+
+                        </div>
+
+                        <form asp-controller="Enrollment" asp-action="Enroll"
+                              method="post">
+
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden"
+                                   name="courseId"
+                                   value="@Model.Id" />
+
+                            <button class="btn btn-success btn-lg px-5">
+
+                                <i class="bi bi-check-circle-fill me-2"></i>
+
+                                Enroll Now
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    <div class="footer-container">
+        <div class="footer-about">
+            <div class="footer-logo">
+                <img src="~/Images/finallooogggggooo.png" alt="">
+                <h2>Learnio</h2>
+            </div>
+
+            <p><i class="fa-solid fa-phone"></i> +20 100 000 0000</p>
+
+            <p><i class="fa-solid fa-envelope"></i> support@learnio.com</p>
+
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                Cairo, Egypt
+            </p>
+            <h3>We are on</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+
+        </div>
+
+        <div class="footer-links">
+            <h3 class="footer-title">Company</h3>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Become an Instructor</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+
+        </div>
+        <div class="footer-links">
+            <h3 class="footer-title">Courses</h3>
+            <ul>
+                <li><a href="#">Web Development</a></li>
+                <li><a href="#">UI / UX</a></li>
+                <li><a href="#">Data Science</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Artificial Intelligence</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-apps">
+            <h3 class="footer-title">Download App</h3>
+            <p>
+                Download our mobile app and
+                learn on the go.
+            </p>
+            <img src="~/Images/app store.png" alt="App Store">
+            <img src="~/Images/goagle play.png" alt="Google Play">
+        </div>
+
+   
+    
+    </div>
+    <hr>
+    <div class="footer-bottom">
+        <p>© 2026 Learnio. All Rights Reserved.</p>
+        <div class="bottom-links">
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+
+
+    </div>
+</div>
+
+<style>
+    .course-card {
+        overflow: hidden;
+        border-radius: 16px;
+    }
+
+        .course-card img {
+            transition: .4s;
+        }
+
+        .course-card:hover img {
+            transform: scale(1.04);
+        }
+
+    .card {
+        border-radius: 16px;
+    }
+
+    .badge {
+        font-size: .8rem;
+    }
+
+    .btn-success {
+        border-radius: 10px;
+        padding: .8rem 2rem;
+        font-weight: 600;
+    }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            transition: .25s;
+        }
+
+    h2 {
+        letter-spacing: -.5px;
+    }
+</style>

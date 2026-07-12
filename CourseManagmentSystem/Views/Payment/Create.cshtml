@@ -1,0 +1,262 @@
+﻿@model CourseManagment.BLL.ViewModels.PaymentVm.CreatePaymentViewModel
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center g-4">
+
+        <!-- ================= ORDER SUMMARY ================= -->
+        <div class="col-lg-4">
+
+            <div class="card shadow-sm border-0 rounded-4 sticky-top" style="top:20px;">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-bold mb-3">Order Summary</h5>
+
+                    @if (!string.IsNullOrEmpty(Model.CourseImage))
+                    {
+                        <img src="@Model.CourseImage"
+                             class="w-100 rounded-3 mb-3"
+                             style="height:150px;object-fit:cover;"
+                             alt="@Model.CourseTitle" />
+                    }
+
+                    <p class="fw-semibold mb-1">
+                        @(Model.CourseTitle ?? "Course")
+                    </p>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between">
+                        <span class="text-muted">Price</span>
+                        <span>$@Model.Amount.ToString("0.00")</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-2">
+                        <span class="text-muted">Fees</span>
+                        <span>$0.00</span>
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Total</span>
+                        <span class="text-success">$@Model.Amount.ToString("0.00")</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ================= CHECKOUT FORM ================= -->
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0 rounded-4">
+
+                <div class="card-header bg-success text-white text-center py-4">
+                    <h3 class="mb-0">
+                        <i class="fa-solid fa-lock me-2"></i>
+                        Secure Checkout
+                    </h3>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+
+                    <div class="alert alert-info d-flex align-items-start gap-2 small">
+                        <i class="fa-solid fa-circle-info mt-1"></i>
+                        <div>
+                            This is a <strong>demo payment</strong>. No real transaction
+                            will be processed. Any card number works &mdash; try one
+                            ending in <code>0000</code> to simulate a declined payment.
+                        </div>
+                    </div>
+
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                    <form asp-action="Create" method="post" id="checkoutForm" novalidate>
+
+                        @Html.AntiForgeryToken()
+
+                        <input asp-for="EnrollmentId" type="hidden" />
+                        <input asp-for="Amount" type="hidden" />
+                        <input asp-for="CourseTitle" type="hidden" />
+                        <input asp-for="CourseImage" type="hidden" />
+
+                        <!-- PAYMENT METHOD SELECTOR -->
+                        <label class="form-label fw-bold mb-2">Payment Method</label>
+
+                        <div class="row row-cols-2 row-cols-md-4 g-2 mb-4" id="methodSelector">
+
+                            <div class="col">
+                                <input type="radio" class="btn-check" name="PaymentMethod"
+                                       id="method_visa" value="@((int)CourseManagment.DAL.Enums.PaymentMethod.Visa)"
+                                       checked>
+                                <label class="btn btn-outline-success w-100 py-3" for="method_visa">
+                                    <i class="fa-brands fa-cc-visa fa-lg d-block mb-1"></i>
+                                    Visa
+                                </label>
+                            </div>
+
+                            <div class="col">
+                                <input type="radio" class="btn-check" name="PaymentMethod"
+                                       id="method_master" value="@((int)CourseManagment.DAL.Enums.PaymentMethod.MasterCard)">
+                                <label class="btn btn-outline-success w-100 py-3" for="method_master">
+                                    <i class="fa-brands fa-cc-mastercard fa-lg d-block mb-1"></i>
+                                    MasterCard
+                                </label>
+                            </div>
+
+                            <div class="col">
+                                <input type="radio" class="btn-check" name="PaymentMethod"
+                                       id="method_paypal" value="@((int)CourseManagment.DAL.Enums.PaymentMethod.PayPal)">
+                                <label class="btn btn-outline-success w-100 py-3" for="method_paypal">
+                                    <i class="fa-brands fa-paypal fa-lg d-block mb-1"></i>
+                                    PayPal
+                                </label>
+                            </div>
+
+                            <div class="col">
+                                <input type="radio" class="btn-check" name="PaymentMethod"
+                                       id="method_vf" value="@((int)CourseManagment.DAL.Enums.PaymentMethod.VodafoneCash)">
+                                <label class="btn btn-outline-success w-100 py-3" for="method_vf">
+                                    <i class="fa-solid fa-mobile-screen fa-lg d-block mb-1"></i>
+                                    Vodafone Cash
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <!-- CARD FIELDS (shown only for Visa / MasterCard) -->
+                        <div id="cardFields">
+
+                            <div class="mb-3">
+                                <label asp-for="CardHolderName" class="form-label fw-bold"></label>
+                                <input asp-for="CardHolderName" class="form-control" placeholder="John Doe" autocomplete="off" />
+                                <span asp-validation-for="CardHolderName" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="CardNumber" class="form-label fw-bold"></label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-white">
+                                        <i class="fa-solid fa-credit-card"></i>
+                                    </span>
+                                    <input asp-for="CardNumber" id="CardNumber" class="form-control"
+                                           placeholder="4242 4242 4242 4242" maxlength="19" autocomplete="off" />
+                                </div>
+                                <span asp-validation-for="CardNumber" class="text-danger small"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-7 mb-3">
+                                    <label asp-for="ExpiryDate" class="form-label fw-bold"></label>
+                                    <input asp-for="ExpiryDate" id="ExpiryDate" class="form-control"
+                                           placeholder="MM/YY" maxlength="5" autocomplete="off" />
+                                    <span asp-validation-for="ExpiryDate" class="text-danger small"></span>
+                                </div>
+
+                                <div class="col-5 mb-3">
+                                    <label asp-for="CVV" class="form-label fw-bold"></label>
+                                    <input asp-for="CVV" id="CVV" type="password" class="form-control"
+                                           placeholder="123" maxlength="4" autocomplete="off" />
+                                    <span asp-validation-for="CVV" class="text-danger small"></span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- INFO SHOWN FOR NON-CARD METHODS -->
+                        <div id="altMethodInfo" class="alert alert-secondary d-none small">
+                            You'll be redirected to complete the payment with the
+                            selected provider (simulated for this demo).
+                        </div>
+
+                        <button type="submit" id="payBtn" class="btn btn-success w-100 py-3 mt-3">
+                            <i class="fa-solid fa-lock me-2"></i>
+                            <span id="payBtnText">Pay $@Model.Amount.ToString("0.00")</span>
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        (function () {
+            const cardMethods = ["@((int)CourseManagment.DAL.Enums.PaymentMethod.Visa)",
+                                  "@((int)CourseManagment.DAL.Enums.PaymentMethod.MasterCard)"];
+
+            const cardFields = document.getElementById("cardFields");
+            const altInfo = document.getElementById("altMethodInfo");
+            const radios = document.querySelectorAll('input[name="PaymentMethod"]');
+
+            function toggleFields() {
+                const selected = document.querySelector('input[name="PaymentMethod"]:checked');
+                const isCard = selected && cardMethods.includes(selected.value);
+
+                cardFields.classList.toggle("d-none", !isCard);
+                altInfo.classList.toggle("d-none", isCard);
+            }
+
+            radios.forEach(r => r.addEventListener("change", toggleFields));
+            toggleFields();
+
+            // Auto-format card number: 4242 4242 4242 4242
+            const cardNumberInput = document.getElementById("CardNumber");
+            if (cardNumberInput) {
+                cardNumberInput.addEventListener("input", function () {
+                    let digits = this.value.replace(/\D/g, "").substring(0, 16);
+                    this.value = digits.replace(/(.{4})/g, "$1 ").trim();
+                });
+            }
+
+            // Auto-format expiry: MM/YY
+            const expiryInput = document.getElementById("ExpiryDate");
+            if (expiryInput) {
+                expiryInput.addEventListener("input", function () {
+                    let digits = this.value.replace(/\D/g, "").substring(0, 4);
+                    if (digits.length >= 3) {
+                        this.value = digits.substring(0, 2) + "/" + digits.substring(2);
+                    } else {
+                        this.value = digits;
+                    }
+                });
+            }
+
+            // CVV: digits only
+            const cvvInput = document.getElementById("CVV");
+            if (cvvInput) {
+                cvvInput.addEventListener("input", function () {
+                    this.value = this.value.replace(/\D/g, "").substring(0, 4);
+                });
+            }
+
+            // Simulated "processing" state on submit
+            const form = document.getElementById("checkoutForm");
+            const payBtn = document.getElementById("payBtn");
+            const payBtnText = document.getElementById("payBtnText");
+
+            form.addEventListener("submit", function () {
+                payBtn.disabled = true;
+                payBtnText.innerHTML =
+                    '<span class="spinner-border spinner-border-sm me-2"></span>Processing payment...';
+            });
+        })();
+    </script>
+}

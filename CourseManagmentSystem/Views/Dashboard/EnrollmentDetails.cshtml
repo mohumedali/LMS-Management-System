@@ -1,0 +1,269 @@
+﻿@model CourseManagment.BLL.ViewModels.EnrollmentVm.EnrollmentDetailsViewModel
+
+@{
+    ViewData["Title"] = "Enrollment Details";
+    Layout = "_AdminLayout";
+}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h2 class="fw-bold">Enrollment Details</h2>
+
+            <p class="text-muted">
+                View enrollment information.
+            </p>
+
+        </div>
+
+        <a asp-action="EnrollmentManagement"
+           class="btn btn-outline-secondary">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back
+
+        </a>
+
+    </div>
+
+    <div class="row">
+
+        <!-- Course Information -->
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+
+                    <h5 class="mb-0">
+
+                        Course Information
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <img src="~/Images/@Model.ImageUrl"
+                                 class="img-fluid rounded shadow-sm"
+                                 alt="@Model.Title" />
+
+                        </div>
+
+                        <div class="col-md-8">
+
+                            <h3 class="fw-bold">
+
+                                @Model.Title
+
+                            </h3>
+
+                            <p class="text-muted">
+
+                                @Model.Description
+
+                            </p>
+
+                            <hr />
+
+                            <div class="row">
+
+                                <div class="col-md-6 mb-3">
+
+                                    <strong>Category</strong>
+
+                                    <br />
+
+                                    @Model.Category
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <strong>Level</strong>
+
+                                    <br />
+
+                                    @Model.Level
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <strong>Language</strong>
+
+                                    <br />
+
+                                    @Model.Language
+
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+
+                                    <strong>Duration</strong>
+
+                                    <br />
+
+                                    @Model.Duration Hours
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <strong>Price</strong>
+
+                                    <br />
+
+                                    <span class="text-success fw-bold">
+
+                                        $@Model.Price
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Enrollment -->
+
+        <div class="col-lg-4">
+
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-header bg-white">
+
+                    <h5 class="mb-0">
+
+                        Enrollment
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="mb-3">
+
+                        <strong>Enrollment ID</strong>
+
+                        <br />
+
+                        #@Model.EnrollmentId
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <strong>Enrollment Date</strong>
+
+                        <br />
+
+                        @Model.EnrollmentDate.ToString("dd MMM yyyy")
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <strong>Status</strong>
+
+                        <br />
+
+                        @switch (Model.Status)
+                        {
+                            case CourseManagment.DAL.Enums.EnrollmentStatus.Active:
+
+                                <span class="badge bg-success">
+
+                                    Active
+
+                                </span>
+
+                                break;
+
+                            case CourseManagment.DAL.Enums.EnrollmentStatus.Completed:
+
+                                <span class="badge bg-primary">
+
+                                    Completed
+
+                                </span>
+
+                                break;
+
+                            default:
+
+                                <span class="badge bg-danger">
+
+                                    Cancelled
+
+                                </span>
+
+                                break;
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-header bg-white">
+
+                    <h5 class="mb-0">
+
+                        Instructor
+
+                    </h5>
+
+                </div>
+
+                <div class="card-body text-center">
+
+                    <img src="~/Images/@Model.InstructorImage"
+                         class="rounded-circle mb-3"
+                         width="110"
+                         height="110" />
+
+                    <h5>
+
+                        @Model.InstructorName
+
+                    </h5>
+
+                    <p class="text-muted">
+
+                        @Model.InstructorBio
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,300 @@
+﻿@model CourseManagment.BLL.ViewModels.CategoriesVM.CategoryManagementPageViewModel
+
+@{
+    ViewData["Title"] = "Category Management";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h2 class="fw-bold mb-1">Category Management</h2>
+            <p class="text-muted mb-0">
+                Manage all categories in your platform.
+            </p>
+        </div>
+        <a asp-action="CreateCategory" class="btn btn-success px-4">
+            <i class="bi bi-plus-circle me-2"></i>
+
+            Create Category
+        </a>
+
+    </div>
+
+    @if (TempData["CategorySuccess"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["CategorySuccess"]
+        </div>
+    }
+
+    @if (TempData["CategoryError"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["CategoryError"]
+        </div>
+    }
+
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Image</th>
+
+                            <th>Name</th>
+
+                            <th>Description</th>
+
+                            <th>Courses</th>
+
+                            <th class="text-center">Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @if (Model.Categories.Any())
+                        {
+                            @foreach (var item in Model.Categories)
+                            {
+                                <tr>
+
+                                    <td>@item.Id</td>
+
+                                    <td>
+
+                                        <img src="~/Images/@item.Image"
+                                             class="course-img" />
+                                    </td>
+
+                                    <td>
+
+                                        <strong>@item.Name</strong>
+
+                                    </td>
+
+                                    <td>
+
+                                        @(item.Description.Length > 40
+                                            ? item.Description.Substring(0, 40) + "..."
+                                            : item.Description)
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="badge bg-primary">
+
+                                            @item.CoursesCount Courses
+
+                                        </span>
+
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <a asp-action="CategoryDetails"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-outline-info">
+
+                                            <i class="bi bi-eye"></i>
+
+                                        </a>
+
+                                        <a asp-action="CategoryEdit"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-outline-warning">
+
+                                            <i class="bi bi-pencil"></i>
+
+                                        </a>
+
+                                        <button class="btn btn-sm btn-outline-danger"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal"
+                                                data-id="@item.Id"
+                                                data-title="@item.Name">
+
+                                            <i class="bi bi-trash"></i>
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+
+                                <td colspan="5" class="text-center py-5">
+
+                                    <i class="fa-solid fa-folder-open fs-1 text-secondary"></i>
+
+                                    <h5 class="mt-3">
+
+                                        No Categories Found
+
+                                    </h5>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade"
+     id="deleteModal"
+     tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header bg-danger text-white">
+
+                <h5 class="modal-title">
+
+                    Delete Category
+
+                </h5>
+
+                <button class="btn-close btn-close-white"
+                        data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body text-center">
+
+                <i class="bi bi-exclamation-triangle-fill
+                    text-danger"
+                   style="font-size:60px">
+                </i>
+
+                <h4 class="mt-3">
+
+                    Are you sure?
+
+                </h4>
+
+                <p>
+
+                    want to delete
+
+                    <strong id="courseName"></strong>
+
+                </p>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+
+                    Cancel
+
+                </button>
+                <form asp-action="DeleteCategory"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <input type="hidden"
+                           id="categoryId"
+                           name="id" />
+
+                    <button type="submit" class="btn btn-danger">
+                        Delete
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<style>
+    .course-img {
+        width: 75px;
+        height: 55px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .table thead th {
+        background: #f8fafc;
+        font-weight: 700;
+        color: #6b7280;
+    }
+
+    .table tbody tr {
+        transition: .25s;
+    }
+
+        .table tbody tr:hover {
+            transform: scale(1.005);
+            background: #f9fafb;
+        }
+
+    .card {
+        border-radius: 18px;
+    }
+
+    .btn {
+        border-radius: 10px;
+    }
+</style>
+@section Scripts {
+
+    <script>
+
+        const deleteModal =
+        document.getElementById('deleteModal');
+
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+
+            const button = event.relatedTarget;
+
+            const id = button.getAttribute('data-id');
+
+            const title = button.getAttribute('data-title');
+
+        document.getElementById('categoryId').value = id;
+
+            document.getElementById('courseName').textContent = title;
+
+        });
+
+    </script>
+
+}

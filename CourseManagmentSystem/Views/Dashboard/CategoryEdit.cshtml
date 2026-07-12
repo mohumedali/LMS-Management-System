@@ -1,0 +1,96 @@
+﻿@model CourseManagment.BLL.ViewModels.CategoriesVM.EditCategoryViewModel
+
+@{
+    ViewData["Title"] = "Edit Category";
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid py-4">
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-warning text-dark">
+
+            <h3 class="mb-0">
+                <i class="fa-solid fa-pen-to-square me-2"></i>
+                Edit Category
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="CategoryEdit" method="post" enctype="multipart/form-data">
+
+                <input asp-for="Id" type="hidden" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="alert alert-danger"></div>
+
+                
+                <div class="mb-3">
+                    <label asp-for="ImageFile" class="form-label"></label>
+                    <input asp-for="ImageFile"
+                           type="file"
+                           class="form-control" />
+
+                    <span asp-validation-for="ImageFile"
+                          class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+
+                    <label asp-for="Name" class="form-label fw-semibold"></label>
+
+                    <input asp-for="Name" class="form-control" />
+
+                    <span asp-validation-for="Name"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label asp-for="Description"
+                           class="form-label fw-semibold"></label>
+
+                    <textarea asp-for="Description"
+                              class="form-control"
+                              rows="6"></textarea>
+
+                    <span asp-validation-for="Description"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+
+                    <a asp-action="CategoryManagement"
+                       class="btn btn-secondary">
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-warning">
+
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+
+                        Save Changes
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
